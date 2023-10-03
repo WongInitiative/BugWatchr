@@ -1,4 +1,4 @@
-# Welcome To BugWatch
+# Welcome To BugWatchr
 
 This is a full-stack admin dashboard I built using the [T3 Stack](https://create.t3.gg/) project.
 
