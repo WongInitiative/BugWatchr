@@ -37,7 +37,7 @@ const TopRowAnalytics = () => {
   const unassignedTickets = numTicketsUnassigned();
   const openTickets = numTicketsByStatus("open");
   const closedTickets = numTicketsByStatus("closed");
-  const inProgressTickets = numTicketsByStatus("in progress");
+  const inProgressTickets = numTicketsByStatus("in_progress");
 
   return (
     <div className="flex flex-row flex-wrap justify-between gap-6">
