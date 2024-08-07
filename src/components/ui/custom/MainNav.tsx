@@ -16,7 +16,7 @@ export function MainNav() {
             <Link className="flex items-center gap-[2px]" href="/">
               <Bug className="h-8 w-8" />
               <Text as="span" size="4" weight="medium">
-                BugWatch
+                BugWatchr
               </Text>
             </Link>
           </div>

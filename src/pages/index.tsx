@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       <SignedOut>
         <div className="grid h-[50vh] place-items-center">
           <div className="flex flex-col items-center gap-2">
-            <Heading size="8">Welcome to BugWatch</Heading>
+            <Heading size="8">Welcome to BugWatchr</Heading>
             <Text as="div" color="gray">
               Please{" "}
               <SignInButton>
