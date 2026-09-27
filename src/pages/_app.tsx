@@ -3,7 +3,7 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import Head from "next/head";
 import { ThemeProvider } from "@/components/ui/custom/ThemeProvider";
-import { ClerkProvider, SignedIn } from "@clerk/nextjs";
+import { ClerkProvider, Show } from "@clerk/nextjs";
 import { MainNav } from "@/components/ui/custom/MainNav";
 import { SideNav } from "@/components/ui/custom/SideNav";
 import "@radix-ui/themes/styles.css";
@@ -25,9 +25,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <main>
             <MainNav />
             <div className="flex items-start">
-              <SignedIn>
+              <Show when="signed-in">
                 <SideNav />
-              </SignedIn>
+              </Show>
 
               <div className="min-h-screen flex-grow basis-[83%] rounded bg-[#F4F4F4] dark:bg-[#111315]">
                 <Component {...pageProps} />

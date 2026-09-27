@@ -2,12 +2,12 @@ import { type NextPage } from "next";
 import TopRowAnalytics from "@/components/ui/custom/analytics/TopRowAnalytics";
 import MiddleRowAnalytics from "@/components/ui/custom/analytics/MiddleRowAnalytics";
 import { Flex, Heading, Text, Link } from "@radix-ui/themes";
-import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
+import { Show, SignInButton } from "@clerk/nextjs";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <SignedIn>
+      <Show when="signed-in">
         <div className="mx-7 my-7">
           <Heading className="pb-5" size="7">
             Dashboard
@@ -17,9 +17,9 @@ const Home: NextPage = () => {
             <MiddleRowAnalytics />
           </Flex>
         </div>
-      </SignedIn>
+      </Show>
 
-      <SignedOut>
+      <Show when="signed-out">
         <div className="grid h-[50vh] place-items-center">
           <div className="flex flex-col items-center gap-2">
             <Heading size="8">Welcome to BugWatchr</Heading>
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
             </Text>
           </div>
         </div>
-      </SignedOut>
+      </Show>
     </div>
   );
 };

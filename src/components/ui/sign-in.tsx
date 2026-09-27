@@ -1,15 +1,20 @@
 import { Card, Button, Heading, Separator, Text } from "@radix-ui/themes";
 import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
-import { type OAuthStrategy } from "@clerk/nextjs/dist/types/server";
+import { type OAuthStrategy } from "@clerk/shared/types";
 import { useSignIn } from "@clerk/nextjs";
 const Login = () => {
   const { signIn } = useSignIn();
 
   const signInWith = (strategy: OAuthStrategy) => {
-    return signIn?.authenticateWithRedirect({
+    // `authenticateWithRedirect` was replaced by `sso` in Clerk v7, and the two
+    // redirect options were renamed: the old `redirectUrl` (where the provider
+    // hands the user back) is now `redirectCallbackUrl`, and the old
+    // `redirectUrlComplete` (where the user lands once signed in) is now
+    // `redirectUrl`.
+    return signIn.sso({
       strategy,
-      redirectUrl: "/tickets",
-      redirectUrlComplete: "/",
+      redirectCallbackUrl: "/tickets",
+      redirectUrl: "/",
     });
   };
   return (
