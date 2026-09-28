@@ -38,31 +38,31 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
       <Link href={`/users/${id}`}>
         {/* min-h keeps every card the same height regardless of how short the
             text is, which in turn keeps the square avatar a consistent size. */}
-        <div className="flex min-h-[132px]">
+        <div className="flex min-h-[104px] sm:min-h-[132px]">
           <Inset className="shrink-0" side="left" pr="current">
             <div className="flex h-full items-center justify-center">
+              {/* This wrapper carries the size in px, which is what lets the
+                  avatar's `height: 100%` resolve (a percentage needs a parent
+                  with a definite height). Smaller on phones so the name and
+                  email keep enough room to stay readable. */}
+              <div className="h-[104px] w-[104px] shrink-0 sm:h-[132px] sm:w-[132px]">
               <Avatar
                 src={image as string}
                 radius="medium"
                 fallback={name?.charAt(0).toUpperCase() as string}
                 color="indigo"
-                // Explicit square, in px. The previous `height: 100%` could not
-                // resolve, because the row's height is decided by its content
-                // and the image is part of that content. The image therefore
-                // fell back to its own aspect ratio at 35% width, so a tall
-                // portrait rendered ~168px high inside a card that clips
-                // overflow, and got visibly cut off, while a wide photo came
-                // out short. A fixed size depends on nothing else, so every
-                // avatar is the same square and `object-fit: cover` centres the
-                // crop consistently.
+                // Fills the sized wrapper above. Originally this was a bare
+                // `height: 100%` with no sized ancestor, so it could not resolve
+                // and each image fell back to its own aspect ratio: tall
+                // portraits overflowed the card and were clipped.
                 style={{
                   borderTopRightRadius: 0,
                   borderBottomRightRadius: 0,
-                  height: "132px",
-                  width: "132px",
-                  flexShrink: 0,
+                  height: "100%",
+                  width: "100%",
                 }}
               />
+              </div>
             </div>
           </Inset>
 
@@ -78,17 +78,19 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
               >
                 {userRole}
               </Badge>
-              <Text className="truncate" as="div" size="4" weight="medium">
+              {/* Wrap rather than truncate: an ellipsised name or email is
+                  unreadable, and these cards can afford the extra line. */}
+              <Text className="break-words" as="div" size="4" weight="medium">
                 {name}
               </Text>
               <Text
-                className="flex items-center gap-1"
+                className="flex items-start gap-1"
                 color="gray"
                 as="div"
                 size="2"
               >
-                <Mail size={15} className="shrink-0" />
-                <span className="truncate">{email}</span>
+                <Mail size={15} className="mt-[3px] shrink-0" />
+                <span className="min-w-0 break-words">{email}</span>
               </Text>
             </div>
 

@@ -77,7 +77,9 @@ const EmployeeDetails = ({ employeeData }: EmployeeDetailsProps) => {
         <Heading>Assigned Tickets</Heading>
         {/* `min-w-0` above plus this scroll container keep the 5-column table
             from widening the page; on narrow screens it scrolls on its own. */}
-        <div className="-mx-1 overflow-x-auto px-1">
+        {/* Full-bleed on phones: the strip runs to both screen edges so the
+            table reads as scrollable rather than clipped mid-card. */}
+        <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <Table.Root className="min-w-[640px] sm:mx-3" variant="surface">
           <Table.Header>
             <Table.Row>
@@ -94,7 +96,11 @@ const EmployeeDetails = ({ employeeData }: EmployeeDetailsProps) => {
               employeeData?.tickets.map((ticket) => (
                 <Table.Row key={ticket?.id} align="center">
                   <Table.RowHeaderCell>{ticket?.title}</Table.RowHeaderCell>
-                  <Table.Cell className="max-w-[60px] overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  {/* Was max-w-[60px] + nowrap + ellipsis, which clipped every
+                      description to a few characters. Let it wrap instead, with
+                      a floor so it cannot collapse and a ceiling so it does not
+                      crowd out the status/priority/category columns. */}
+                  <Table.Cell className="w-2/5 min-w-[200px] max-w-[420px] whitespace-normal break-words align-top">
                     {ticket?.content}
                   </Table.Cell>
                   <Table.Cell>

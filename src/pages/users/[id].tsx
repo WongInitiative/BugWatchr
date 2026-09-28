@@ -21,8 +21,10 @@ const UserDetailsPage: NextPage = () => {
     getEmployee?.data as employeesWithTicketsType;
 
   return (
-    <div className="mx-11 my-9 flex flex-col gap-10">
-      <div className="flex items-center justify-between">
+    // mx-11 was 88px of horizontal margin, which left a 375px phone barely
+    // 287px of usable width and squeezed the assigned-tickets table.
+    <div className="mx-4 my-6 flex flex-col gap-8 sm:mx-11 sm:my-9 sm:gap-10">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Heading size="7">User Details</Heading>
         <Dialog.Root open={edit ? true : false}>
           <Dialog.Trigger>
