@@ -48,7 +48,7 @@ const CategoryTicketsPieChart = ({ className }: PieChartProps) => {
           Open Tickets By Category
         </Title>
         <DonutChart
-          className="m-0 h-[300px] w-[300px] self-center"
+          className="m-0 h-[240px] w-full max-w-[300px] self-center sm:h-[300px]"
           data={data}
           category="count"
           index="name"

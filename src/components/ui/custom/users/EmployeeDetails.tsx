@@ -24,11 +24,13 @@ type EmployeeDetailsProps = {
 
 const EmployeeDetails = ({ employeeData }: EmployeeDetailsProps) => {
   return (
-    <div className="flex flex-row flex-wrap gap-8">
+    // Explicit stacking below `lg` rather than relying on flex-wrap, so the
+    // profile card and the tickets table each get the full width on phones.
+    <div className="flex flex-col gap-8 lg:flex-row">
       {/* left half */}
       <Card size="3" variant="ghost">
         <div className="flex flex-col gap-4">
-          <Avatar className="h-[260px] w-[260px]">
+          <Avatar className="h-40 w-40 sm:h-[260px] sm:w-[260px]">
             <AvatarImage src={employeeData?.image as string} />
             <AvatarFallback className="bg-[#0144ff0f] dark:bg-[#234fff2e]">
               {employeeData?.name?.charAt(0).toUpperCase() as string}
@@ -71,9 +73,12 @@ const EmployeeDetails = ({ employeeData }: EmployeeDetailsProps) => {
       </Card>
 
       {/* right half */}
-      <div className="flex grow flex-col flex-wrap gap-4">
+      <div className="flex min-w-0 grow flex-col gap-4">
         <Heading>Assigned Tickets</Heading>
-        <Table.Root className="mx-3 grow" variant="surface">
+        {/* `min-w-0` above plus this scroll container keep the 5-column table
+            from widening the page; on narrow screens it scrolls on its own. */}
+        <div className="-mx-1 overflow-x-auto px-1">
+          <Table.Root className="min-w-[640px] sm:mx-3" variant="surface">
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
@@ -149,7 +154,8 @@ const EmployeeDetails = ({ employeeData }: EmployeeDetailsProps) => {
               </Table.Row>
             )}
           </Table.Body>
-        </Table.Root>
+          </Table.Root>
+        </div>
       </div>
     </div>
   );

@@ -64,6 +64,18 @@ const Login = () => {
                 </Button>
               </div>
             </div>
+            <div className="flex flex-row items-center justify-center gap-4">
+              <div className="jusitfy-center flex flex-row items-center gap-2">
+                <Button
+                  style={{ height: "50px", width: "165px" }}
+                  size="4"
+                  variant="surface"
+                  onClick={() => void signInWith("oauth_google")}
+                >
+                  Google
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </Card>

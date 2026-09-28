@@ -5,7 +5,7 @@ import { type NextPage } from "next";
 
 const ProjectsPage: NextPage = () => {
   return (
-    <div className="mx-7 my-7 flex-col">
+    <div className="mx-4 my-5 flex-col sm:mx-7 sm:my-7">
       <div className="flex flex-col items-center justify-center gap-14 pb-5">
         <Heading size="7" style={{ letterSpacing: "0.025em" }}>
           UNDER CONSTRUCTION

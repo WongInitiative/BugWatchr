@@ -22,7 +22,7 @@ const TicketDetails = ({ ticketData }: TicketDetailsProps) => {
         <div className="flex flex-col gap-3">
           {/** top half - 1 */}
           <div>
-            <div className="flex grow flex-row justify-between">
+            <div className="flex grow flex-row items-start justify-between gap-3">
               <Heading size="7">{ticketData?.title}</Heading>
               <Badge
                 size="2"

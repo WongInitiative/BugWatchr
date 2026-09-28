@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Show when="signed-in">
-        <div className="mx-7 my-7">
+        <div className="mx-4 my-5 sm:mx-7 sm:my-7">
           <Heading className="pb-5" size="7">
             Dashboard
           </Heading>
@@ -20,9 +20,11 @@ const Home: NextPage = () => {
       </Show>
 
       <Show when="signed-out">
-        <div className="grid h-[50vh] place-items-center">
-          <div className="flex flex-col items-center gap-2">
-            <Heading size="8">Welcome to BugWatchr</Heading>
+        <div className="grid h-[50vh] place-items-center px-4">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <Heading size={{ initial: "7", sm: "8" }}>
+              Welcome to BugWatchr
+            </Heading>
             <Text as="div" color="gray">
               Please{" "}
               <SignInButton>

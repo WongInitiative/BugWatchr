@@ -32,7 +32,6 @@ const numTicketsUnassigned = () => {
 
   return data?.length;
 };
-//TODO: fix responsive stretching of cards
 const TopRowAnalytics = () => {
   const unassignedTickets = numTicketsUnassigned();
   const openTickets = numTicketsByStatus("open");
@@ -40,11 +39,11 @@ const TopRowAnalytics = () => {
   const inProgressTickets = numTicketsByStatus("in_progress");
 
   return (
-    <div className="flex flex-row flex-wrap justify-between gap-6">
-      <Card
-        className="w-[calc((100%-3*24px)/4)] min-w-[21%] grow"
-        variant="classic"
-      >
+    // A grid rather than flex + width calc: 2 stat cards per row on phones,
+    // 4 once there's room. Replaces the hardcoded quarter-width that squeezed
+    // all four into ~60px each on mobile.
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+      <Card variant="classic">
         <Flex className="px-3 py-1" direction="column">
           <Text
             className="pb-2"
@@ -64,10 +63,7 @@ const TopRowAnalytics = () => {
         </Flex>
       </Card>
 
-      <Card
-        className="w-[calc((100%-3*24px)/4)] min-w-[21%] grow"
-        variant="classic"
-      >
+      <Card variant="classic">
         <Flex className="px-3 py-1" direction="column">
           <Text
             className="pb-2"
@@ -87,10 +83,7 @@ const TopRowAnalytics = () => {
         </Flex>
       </Card>
 
-      <Card
-        className="w-[calc((100%-3*24px)/4)] min-w-[21%] grow"
-        variant="classic"
-      >
+      <Card variant="classic">
         <Flex className="px-3 py-1" direction="column">
           <Text
             className="pb-2"
@@ -110,10 +103,7 @@ const TopRowAnalytics = () => {
         </Flex>
       </Card>
 
-      <Card
-        className="w-[calc((100%-3*24px)/4)] min-w-[21%] grow"
-        variant="classic"
-      >
+      <Card variant="classic">
         <Flex className="px-3 py-1" direction="column">
           <Text
             className="pb-2"

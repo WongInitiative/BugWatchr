@@ -24,6 +24,12 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    // Point Clerk at the in-app pages under src/pages/sign-in and
+    // src/pages/sign-up. Without these, `auth.protect()` and <SignInButton>
+    // fall back to Clerk's hosted Account Portal. Kept optional so a missing
+    // value degrades to that fallback instead of failing the build.
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().optional(),
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().optional(),
   },
 
   /**
@@ -36,6 +42,8 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
     NODE_ENV: process.env.NODE_ENV,
   },
   /**

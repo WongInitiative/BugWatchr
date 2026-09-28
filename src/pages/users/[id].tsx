@@ -42,7 +42,7 @@ const UserDetailsPage: NextPage = () => {
         </Dialog.Root>
       </div>
 
-      <div className="mx-7">
+      <div className="mx-0 sm:mx-7">
         {id != null ? <EmployeeDetails employeeData={employeeData} /> : null}
       </div>
     </div>

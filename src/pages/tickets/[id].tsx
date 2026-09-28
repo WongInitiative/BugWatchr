@@ -21,8 +21,8 @@ const TicketDetailsPage: NextPage = () => {
     getTicket?.data as ticketWithEmployeeType;
 
   return (
-    <div className="mx-7 my-7 flex flex-col">
-      <div className="flex items-center justify-between pb-5">
+    <div className="mx-4 my-5 flex flex-col sm:mx-7 sm:my-7">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-5">
         <Heading>Ticket Details</Heading>
         <Dialog.Root open={edit ? true : false}>
           <Dialog.Trigger>

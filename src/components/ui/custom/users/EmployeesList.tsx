@@ -29,7 +29,7 @@ const EmployeesList = ({ data }: EmployeesListProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="self-end">
+      <div className="w-full sm:w-auto sm:self-end">
         <TextField.Root>
           <TextField.Slot>
             <Search size={16} />
@@ -41,7 +41,7 @@ const EmployeesList = ({ data }: EmployeesListProps) => {
         </TextField.Root>
       </div>
 
-      <div className="grid grid-cols-3 gap-x-4 gap-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {dataToShow?.map((employee) => (
           <EmployeesListEntry key={employee?.id} employee={employee} />
         ))}

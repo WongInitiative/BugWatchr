@@ -43,8 +43,10 @@ const MiddleRowAnalytics = () => {
   ];
 
   return (
-    <div className="flex flex-row flex-wrap justify-between gap-5">
-      <div className="min-w-[65%]">
+    // Stacks on phones, then 2/3 + 1/3 from `lg`. The old min-w-[65%] /
+    // max-w-[35%] pair forced both charts side by side at every width.
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+      <div className="min-w-0 lg:col-span-2">
         <Card size="2">
           <div className="flex flex-col py-1">
             <Title className="pl-4 text-lg tracking-wide">
@@ -62,7 +64,7 @@ const MiddleRowAnalytics = () => {
           </div>
         </Card>
       </div>
-      <CategoryTicketsPieChart className="max-w-[35%] grow" />
+      <CategoryTicketsPieChart className="min-w-0" />
     </div>
   );
 };
