@@ -36,25 +36,39 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
   return (
     <Card size="2" asChild>
       <Link href={`/users/${id}`}>
-        <div className="flex">
-          <Inset className="basis-[35%]" side="left" pr="current">
+        {/* min-h keeps every card the same height regardless of how short the
+            text is, which in turn keeps the square avatar a consistent size. */}
+        <div className="flex min-h-[132px]">
+          <Inset className="shrink-0" side="left" pr="current">
             <div className="flex h-full items-center justify-center">
               <Avatar
                 src={image as string}
                 radius="medium"
                 fallback={name?.charAt(0).toUpperCase() as string}
                 color="indigo"
+                // Explicit square, in px. The previous `height: 100%` could not
+                // resolve, because the row's height is decided by its content
+                // and the image is part of that content. The image therefore
+                // fell back to its own aspect ratio at 35% width, so a tall
+                // portrait rendered ~168px high inside a card that clips
+                // overflow, and got visibly cut off, while a wide photo came
+                // out short. A fixed size depends on nothing else, so every
+                // avatar is the same square and `object-fit: cover` centres the
+                // crop consistently.
                 style={{
                   borderTopRightRadius: 0,
                   borderBottomRightRadius: 0,
-                  height: "100%",
-                  width: "100%",
+                  height: "132px",
+                  width: "132px",
+                  flexShrink: 0,
                 }}
               />
             </div>
           </Inset>
 
-          <div className="flex grow flex-col justify-between pl-2">
+          {/* min-w-0 lets this column shrink below its text's intrinsic width,
+              so long names and emails truncate instead of widening the card. */}
+          <div className="flex min-w-0 grow flex-col justify-between pl-2">
             {/* top part */}
             <div className="mb-3 flex flex-col">
               <Badge
@@ -64,7 +78,7 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
               >
                 {userRole}
               </Badge>
-              <Text as="div" size="4" weight="medium">
+              <Text className="truncate" as="div" size="4" weight="medium">
                 {name}
               </Text>
               <Text
@@ -73,8 +87,8 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
                 as="div"
                 size="2"
               >
-                <Mail size={15} />
-                {email}
+                <Mail size={15} className="shrink-0" />
+                <span className="truncate">{email}</span>
               </Text>
             </div>
 
@@ -82,7 +96,7 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
             <div className="flex flex-row">
               <div className="flex flex-col">
                 <Text className="flex items-center gap-1" as="div" size="2">
-                  <FolderKanban size={17} className="mb-[1px]" />
+                  <FolderKanban size={17} className="mb-[1px] shrink-0" />
                   {tickets.length === 1
                     ? `${tickets.length} Assigned Ticket`
                     : `${tickets.length} Assigned Tickets`}
@@ -93,7 +107,13 @@ const EmployeesListEntry = ({ employee }: EmployeesListEntryProps) => {
 
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
-              <Button variant="ghost" radius="large" color="gray" highContrast>
+              <Button
+                className="shrink-0"
+                variant="ghost"
+                radius="large"
+                color="gray"
+                highContrast
+              >
                 <MoreVertical />
               </Button>
             </DropdownMenu.Trigger>
